@@ -17,17 +17,31 @@ public class LinkedList<E> {
 
 	public void add(E element) {
 		if (element != null) {
+			Node<E> temp;
+			
 			if (size != 0) {
-				Node<E> temp = new Node(last, element, null);
+				temp = new Node(last, element, null);
 				last.next = temp;
 				last = temp;
 				size++;
 			} else {
-				Node<E> temp = new Node(null, element, null);
+				temp = new Node(null, element, null);
 				first = temp;
 				last = temp;
 				size++;
 			}
+		}
+	}
+	
+	public void add(int index, E element) {
+		Node<E> actual = getNode(index);
+		Node<E> prev = actual.prev;
+		
+		if(actual != null) {
+			Node<E> temp = new Node(prev, element, actual);
+			prev.next = temp;
+			actual.prev = temp;
+			size++;
 		}
 	}
 
@@ -39,9 +53,22 @@ public class LinkedList<E> {
 		}
 	}
 
-	public E get(int index) {
+	public E get(int index) throws IndexOutOfBoundsException {
+		if(index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		Node<E> cell = getNode(index);
+		if(cell != null) {
+			return cell.item;
+		} else {
+		return null;
+		}
+	}
+	
+	private Node getNode(int index) {
+		Node<E> temp = null;
 		if (index < size) {
-			Node<E> temp = null;
 			
 			if (index < size/2) {
 				temp = first;
@@ -55,13 +82,25 @@ public class LinkedList<E> {
 					temp = temp.prev;
 				}
 			}
-			return temp.item;
 		}
-		return null;
+		return temp;
 	}
+	
 
-	public int getSize() {
+	public int getsize() {
 		return size;
+	}
+	
+	public E remove(int index) throws IndexOutOfBoundsException{
+		if(index < 0 || index >= size) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		Node<E> actual = getNode(index);
+		actual.prev.next = actual.next;
+		actual.next.prev = actual.prev;
+		size--;
+		return actual.item;
 	}
 
 	private class Node<E> {
