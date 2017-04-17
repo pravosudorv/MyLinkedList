@@ -21,7 +21,8 @@ public class Main {
 		System.out.println(list.get(4));
 		System.out.println(list.get(5));
 		
-		list.remove(2);
+		A del = new A(99);
+		list.remove(del);
 		
 		System.out.println(list.get(0));
 		System.out.println(list.get(1));

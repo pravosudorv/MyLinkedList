@@ -102,6 +102,29 @@ public class LinkedList<E> {
 		size--;
 		return actual.item;
 	}
+	
+	public void remove(E element) {
+		if(!isEmpty() || element != null) {
+			Node<E> actual = first;
+			for (int i = 0; i < size; i++) {
+				actual = actual.next;
+				if(element.equals(actual.item)) {
+					actual.prev.next = actual.next;
+					actual.next.prev = actual.prev;
+					size--;
+					return;
+				}
+			}
+		}
+	}
+	
+	public boolean isEmpty() {
+		if (first == null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	private class Node<E> {
 		E item;
