@@ -11,23 +11,34 @@ public class Main {
 		list.add(new A(4));
 		list.add(new A(5));
 		
+		print(list);
 		
 		list.add(2, new A(99));
 		
-		System.out.println(list.get(0));
-		System.out.println(list.get(1));
-		System.out.println(list.get(2));
-		System.out.println(list.get(3));
-		System.out.println(list.get(4));
-		System.out.println(list.get(5));
-		
+		print(list);
+	
 		A del = new A(99);
 		list.remove(del);
 		
-		System.out.println(list.get(0));
-		System.out.println(list.get(1));
-		System.out.println(list.get(2));
-		System.out.println(list.get(3));
-		System.out.println(list.get(4));
+		print(list);
+		
+		LinkedList<A> list2 = new LinkedList<A>();
+		
+		list2.add(new A(55));
+		list2.add(new A(66));
+		list2.add(new A(77));
+		
+		list.addLinkedLIst(2, list2);
+		
+		print(list);
+	}
+	
+	public static void print(LinkedList<A> list) {
+		A i = list.iteratorInstalFirst();
+		while(i != null) {
+			System.out.print(" ["+i + "] ");
+			i = list.iteratorNext();
+		}
+		System.out.println();
 	}
 }
